@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Allow browser extensions to intercept window.fetch safely without getter-only TypeError
+      try {
+        var _fetch = window.fetch;
+        Object.defineProperty(window, 'fetch', {
+          get: function() { return _fetch; },
+          set: function(fn) { _fetch = fn; },
+          configurable: true,
+          enumerable: true
+        });
+      } catch (e) {
+        // Fallback: suppress error
+      }
+    </script>
+    <title>Grow your Discord server, organically — coin4sell</title>
+    <meta name="description" content="A discovery network where real Discord members explore communities they care about. Feature your server to the right audience — no bots, no fake accounts, just genuine growth." />
+    <meta property="og:title" content="Grow your Discord server, organically — coin4sell" />
+    <meta property="og:description" content="A discovery network where real Discord members explore communities they care about. Feature your server to the right audience — no bots, no fake accounts, just genuine growth." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#05070D] text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] antialiased selection:bg-sky-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

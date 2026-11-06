@@ -1,0 +1,6 @@
+{
+  "name": "Community Discovery & Growth Network",
+  "description": "Organic Discord server discovery and promotion network landing page clone with interactive dashboard preview, coin pricing calculator, and FAQ.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

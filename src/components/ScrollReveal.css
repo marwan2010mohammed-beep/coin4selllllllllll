@@ -1,0 +1,17 @@
+.scroll-reveal {
+  display: block;
+}
+
+.scroll-reveal-text {
+  display: block;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.scroll-reveal-word,
+.scroll-reveal-piece {
+  display: inline-block;
+  white-space: pre-wrap;
+}
