@@ -19,9 +19,12 @@ export const XTwitterIcon: React.FC<{ className?: string }> = ({ className = 'w-
 
 export const JoinsLogoIcon: React.FC<{ className?: string }> = ({ className = 'w-7 h-7' }) => (
   <img
-    src="/public/assets/aistudio/coin-4-sell-icon-4096-removebg-preview_9b8d4a79.png"
+    src="/assets/aistudio/coin-4-sell-icon-4096-removebg-preview_9b8d4a79.png"
     alt="Coin 4 Sell Logo"
     className={`object-contain ${className}`}
+    onError={(e) => {
+      (e.currentTarget as HTMLImageElement).src = '/public/assets/aistudio/coin-4-sell-icon-4096-removebg-preview_9b8d4a79.png';
+    }}
   />
 );
 
