@@ -123,14 +123,15 @@ export const FaqAccordion: React.FC<FaqAccordionProps> = ({ onJoinDiscord }) => 
           <p className="text-xs sm:text-sm text-slate-400">
             Still have questions? Our team is happy to help.
           </p>
-          <button
-            onClick={onJoinDiscord}
-            type="button"
-            className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0f172a] hover:bg-[#1e293b] border border-slate-800 text-white text-xs sm:text-sm font-semibold transition-all hover:scale-105 active:scale-95"
+          <a
+            href="https://discord.gg/tB5WHHQbzh"
+            target="_blank"
+            rel="noreferrer"
+            className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0f172a] hover:bg-[#1e293b] border border-slate-800 text-white text-xs sm:text-sm font-semibold transition-all hover:scale-105 active:scale-95 no-underline"
           >
             <DiscordIcon className="w-4 h-4" />
             <span>Join our Discord</span>
-          </button>
+          </a>
         </div>
       </div>
     </section>

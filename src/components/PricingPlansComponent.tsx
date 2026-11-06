@@ -34,7 +34,7 @@ const plans: PricingPlan[] = [
     id: 'starter',
     name: 'Community Starter',
     description: 'Perfect for new Discord servers starting organic growth.',
-    price: { monthly: 19, annual: 15 },
+    price: { monthly: 18.99, annual: 15 },
     icon: Rocket,
     ctaText: 'Get Started',
     features: [
@@ -48,7 +48,7 @@ const plans: PricingPlan[] = [
     id: 'pro',
     name: 'Professional Boost',
     description: 'For growing communities scaling up rapidly.',
-    price: { monthly: 49, annual: 39 },
+    price: { monthly: 48.99, annual: 39 },
     icon: Zap,
     highlight: true,
     ctaText: 'Upgrade to Pro',
@@ -64,7 +64,7 @@ const plans: PricingPlan[] = [
     id: 'enterprise',
     name: 'Enterprise Network',
     description: 'For large-scale mission-critical communities.',
-    price: { monthly: 199, annual: 159 },
+    price: { monthly: 99.99, annual: 79 },
     icon: Building2,
     ctaText: 'Contact Sales',
     features: [
