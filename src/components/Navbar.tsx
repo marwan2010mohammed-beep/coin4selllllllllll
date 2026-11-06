@@ -26,7 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 100);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -42,13 +42,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#060913]/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20'
-          : 'bg-transparent border-b border-transparent'
+          ? 'h-14 sm:h-16 bg-[#060913]/70 backdrop-blur-xl border-b border-sky-500/30 shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+          : 'h-16 sm:h-20 bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
         {/* Brand Zone */}
         <a
           href="#"
