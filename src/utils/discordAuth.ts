@@ -9,7 +9,7 @@ export interface DiscordUser {
 }
 
 export const DISCORD_CLIENT_ID = '1567571721500758167';
-export const DISCORD_REDIRECT_URI = 'https://coin4sell.vercel.app/';
+export const DISCORD_REDIRECT_URI = typeof window !== 'undefined' ? window.location.origin + '/' : 'https://coin4sell.vercel.app/';
 
 export function getDiscordAuthUrl(redirectUri: string = DISCORD_REDIRECT_URI): string {
   const params = new URLSearchParams({
