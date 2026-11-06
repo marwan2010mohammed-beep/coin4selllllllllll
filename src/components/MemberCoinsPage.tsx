@@ -73,8 +73,9 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
     e.preventDefault();
     const val = parseInt(coinInput1, 10);
     if (isNaN(val) || val <= 0) return;
+    const clamped = Math.min(val, 10000);
 
-    onEarnCoins(val);
+    onEarnCoins(clamped);
     setCoinInput1('');
   };
 
@@ -82,8 +83,9 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
     e.preventDefault();
     const val = parseInt(coinInput2, 10);
     if (isNaN(val) || val <= 0) return;
+    const clamped = Math.min(val, 10000);
 
-    onEarnCoins(val);
+    onEarnCoins(clamped);
     setCoinInput2('');
   };
 
@@ -91,8 +93,9 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
     e.preventDefault();
     const val = parseInt(coinInput3, 10);
     if (isNaN(val) || val <= 0) return;
+    const clamped = Math.min(val, 10000);
 
-    onEarnCoins(val);
+    onEarnCoins(clamped);
     setCoinInput3('');
   };
 
@@ -394,29 +397,33 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
               />
             </div>
             <form onSubmit={handleSubmit1} className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="relative max-w-[150px]">
-                  <input
-                    type="number"
-                    min="1"
-                    placeholder="Type members..."
-                    value={coinInput1}
-                    onChange={(e) => setCoinInput1(e.target.value)}
-                    className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
-                  />
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <div className="relative max-w-[150px]">
+                    <input
+                      type="number"
+                      min="1"
+                      max="10000"
+                      placeholder="Type members..."
+                      value={coinInput1}
+                      onChange={(e) => setCoinInput1(e.target.value)}
+                      className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all shrink-0"
+                  >
+                    <span>Add</span>
+                    <Send className="w-3 h-3" />
+                  </button>
                 </div>
-                <button
-                  type="submit"
-                  className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all shrink-0"
-                >
-                  <span>Add</span>
-                  <Send className="w-3 h-3" />
-                </button>
+                <div className="text-[10px] text-slate-400 font-medium pl-0.5">Maximum is 10k</div>
               </div>
               <div className="h-4">
                 {parseInt(coinInput1, 10) > 0 && (
                   <div className="text-red-500 text-[10px] font-bold flex items-center gap-1">
-                    <span>Needs {parseInt(coinInput1, 10)} Coins</span>
+                    <span>Needs {Math.min(parseInt(coinInput1, 10), 10000)} Coins</span>
                     <GoldCoinIcon className="w-3 h-3" />
                   </div>
                 )}
