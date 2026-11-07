@@ -33,8 +33,14 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
 }) => {
   const [coinInput1, setCoinInput1] = useState('');
   const [discordInput1, setDiscordInput1] = useState('');
+  const [touchedCoin1, setTouchedCoin1] = useState(false);
+  const [touchedDiscord1, setTouchedDiscord1] = useState(false);
+
   const [coinInput2, setCoinInput2] = useState('');
   const [discordInput2, setDiscordInput2] = useState('');
+  const [touchedCoin2, setTouchedCoin2] = useState(false);
+  const [touchedDiscord2, setTouchedDiscord2] = useState(false);
+
   const [coinInput3, setCoinInput3] = useState('');
   const [discordInput3, setDiscordInput3] = useState('');
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
@@ -81,6 +87,8 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
     onEarnCoins(clamped);
     setCoinInput1('');
     setDiscordInput1('');
+    setTouchedCoin1(false);
+    setTouchedDiscord1(false);
   };
 
   const handleSubmit2 = (e: React.FormEvent) => {
@@ -92,6 +100,8 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
     onEarnCoins(clamped);
     setCoinInput2('');
     setDiscordInput2('');
+    setTouchedCoin2(false);
+    setTouchedDiscord2(false);
   };
 
   const handleSubmit3 = (e: React.FormEvent) => {
@@ -405,27 +415,40 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
             <form onSubmit={handleSubmit1} className="flex flex-col gap-3">
               <div className="space-y-1">
                 <label className="block text-[11px] font-semibold text-slate-300">Amount of Coins:</label>
-                <div className="flex items-center gap-2">
-                  <div className="relative max-w-[150px]">
-                    <input
-                      type="number"
-                      min="1"
-                      max="10000"
-                      placeholder="Type members..."
-                      value={coinInput1}
-                      onChange={(e) => setCoinInput1(e.target.value)}
-                      className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all shrink-0"
-                  >
-                    <span>Add</span>
-                    <Send className="w-3 h-3" />
-                  </button>
+                <div className="relative">
+                  <input
+                    type="number"
+                    min="1"
+                    max="10000"
+                    placeholder="Type coins..."
+                    value={coinInput1}
+                    onChange={(e) => {
+                      setCoinInput1(e.target.value);
+                      setTouchedCoin1(false);
+                    }}
+                    onBlur={() => setTouchedCoin1(true)}
+                    className={`w-full bg-[#050811] border rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner ${
+                      (touchedCoin1 && !coinInput1) || (parseInt(coinInput1, 10) > coins)
+                        ? 'border-red-500 bg-red-950/25'
+                        : 'border-slate-700/80 focus:border-sky-500'
+                    }`}
+                  />
                 </div>
-                <div className="text-[10px] text-slate-400 font-medium pl-0.5">Maximum is 10k</div>
+                {touchedCoin1 && !coinInput1 && (
+                  <div className="text-red-500 text-[10px] font-bold mt-0.5">Required</div>
+                )}
+                {parseInt(coinInput1, 10) > coins && (
+                  <div className="text-red-500 text-[10px] font-bold mt-0.5 flex items-center gap-1">
+                    <span>You have {coins.toFixed(0)} coins (Insufficient)</span>
+                    <GoldCoinIcon className="w-3 h-3" />
+                  </div>
+                )}
+                {parseInt(coinInput1, 10) > 0 && parseInt(coinInput1, 10) <= coins && (
+                  <div className="text-emerald-400 text-[10px] font-bold mt-0.5 flex items-center gap-1">
+                    <span>Valid amount ({parseInt(coinInput1, 10)} coins)</span>
+                    <GoldCoinIcon className="w-3 h-3" />
+                  </div>
+                )}
               </div>
 
               <div className="space-y-1">
@@ -435,20 +458,27 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
                     type="text"
                     placeholder="username#0000"
                     value={discordInput1}
-                    onChange={(e) => setDiscordInput1(e.target.value)}
-                    className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
+                    onChange={(e) => {
+                      setDiscordInput1(e.target.value);
+                      setTouchedDiscord1(false);
+                    }}
+                    onBlur={() => setTouchedDiscord1(true)}
+                    className={`w-full bg-[#050811] border rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner ${
+                      touchedDiscord1 ? 'border-red-500 bg-red-950/25' : 'border-slate-700/80 focus:border-sky-500'
+                    }`}
                   />
                 </div>
-              </div>
-
-              <div className="h-4">
-                {parseInt(coinInput1, 10) > 0 && (
-                  <div className="text-red-500 text-[10px] font-bold flex items-center gap-1">
-                    <span>Needs {Math.min(parseInt(coinInput1, 10), 10000)} Coins</span>
-                    <GoldCoinIcon className="w-3 h-3" />
-                  </div>
+                {touchedDiscord1 && !discordInput1 && (
+                  <div className="text-red-500 text-[10px] font-bold mt-0.5">Required</div>
                 )}
               </div>
+
+              <button
+                type="submit"
+                className="cursor-pointer w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all flex items-center justify-center gap-1.5 mt-2"
+              >
+                <span>Apply</span>
+              </button>
             </form>
           </div>
 
@@ -467,27 +497,40 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
             <form onSubmit={handleSubmit2} className="flex flex-col gap-3">
               <div className="space-y-1">
                 <label className="block text-[11px] font-semibold text-slate-300">Amount of Coins:</label>
-                <div className="flex items-center gap-2">
-                  <div className="relative max-w-[150px]">
-                    <input
-                      type="number"
-                      min="1"
-                      max="10000"
-                      placeholder="Type subs..."
-                      value={coinInput2}
-                      onChange={(e) => setCoinInput2(e.target.value)}
-                      className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="cursor-pointer inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all shrink-0"
-                  >
-                    <span>Add</span>
-                    <Send className="w-3 h-3" />
-                  </button>
+                <div className="relative">
+                  <input
+                    type="number"
+                    min="1"
+                    max="10000"
+                    placeholder="Type coins..."
+                    value={coinInput2}
+                    onChange={(e) => {
+                      setCoinInput2(e.target.value);
+                      setTouchedCoin2(false);
+                    }}
+                    onBlur={() => setTouchedCoin2(true)}
+                    className={`w-full bg-[#050811] border rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner ${
+                      (touchedCoin2 && !coinInput2) || (parseInt(coinInput2, 10) > coins)
+                        ? 'border-red-500 bg-red-950/25'
+                        : 'border-slate-700/80 focus:border-sky-500'
+                    }`}
+                  />
                 </div>
-                <div className="text-[10px] text-slate-400 font-medium pl-0.5">Maximum is 10k</div>
+                {touchedCoin2 && !coinInput2 && (
+                  <div className="text-red-500 text-[10px] font-bold mt-0.5">Required</div>
+                )}
+                {parseInt(coinInput2, 10) > coins && (
+                  <div className="text-red-500 text-[10px] font-bold mt-0.5 flex items-center gap-1">
+                    <span>You have {coins.toFixed(0)} coins (Insufficient)</span>
+                    <GoldCoinIcon className="w-3 h-3" />
+                  </div>
+                )}
+                {parseInt(coinInput2, 10) > 0 && parseInt(coinInput2, 10) <= coins && (
+                  <div className="text-emerald-400 text-[10px] font-bold mt-0.5 flex items-center gap-1">
+                    <span>Valid amount ({parseInt(coinInput2, 10)} coins)</span>
+                    <GoldCoinIcon className="w-3 h-3" />
+                  </div>
+                )}
               </div>
 
               <div className="space-y-1">
@@ -497,20 +540,27 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
                     type="text"
                     placeholder="username#0000"
                     value={discordInput2}
-                    onChange={(e) => setDiscordInput2(e.target.value)}
-                    className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
+                    onChange={(e) => {
+                      setDiscordInput2(e.target.value);
+                      setTouchedDiscord2(false);
+                    }}
+                    onBlur={() => setTouchedDiscord2(true)}
+                    className={`w-full bg-[#050811] border rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner ${
+                      touchedDiscord2 ? 'border-red-500 bg-red-950/25' : 'border-slate-700/80 focus:border-sky-500'
+                    }`}
                   />
                 </div>
-              </div>
-
-              <div className="h-4">
-                {parseInt(coinInput2, 10) > 0 && (
-                  <div className="text-red-500 text-[10px] font-bold flex items-center gap-1">
-                    <span>Needs {Math.min(parseInt(coinInput2, 10), 10000)} Subs</span>
-                    <GoldCoinIcon className="w-3 h-3" />
-                  </div>
+                {touchedDiscord2 && !discordInput2 && (
+                  <div className="text-red-500 text-[10px] font-bold mt-0.5">Required</div>
                 )}
               </div>
+
+              <button
+                type="submit"
+                className="cursor-pointer w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-[0_0_15px_rgba(56,189,248,0.3)] transition-all flex items-center justify-center gap-1.5 mt-2"
+              >
+                <span>Apply</span>
+              </button>
             </form>
           </div>
         </div>
