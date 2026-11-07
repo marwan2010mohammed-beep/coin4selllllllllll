@@ -32,8 +32,11 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
   onLogout,
 }) => {
   const [coinInput1, setCoinInput1] = useState('');
+  const [discordInput1, setDiscordInput1] = useState('');
   const [coinInput2, setCoinInput2] = useState('');
+  const [discordInput2, setDiscordInput2] = useState('');
   const [coinInput3, setCoinInput3] = useState('');
+  const [discordInput3, setDiscordInput3] = useState('');
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
 
   const getTodayDateKey = () => {
@@ -77,6 +80,7 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
 
     onEarnCoins(clamped);
     setCoinInput1('');
+    setDiscordInput1('');
   };
 
   const handleSubmit2 = (e: React.FormEvent) => {
@@ -87,6 +91,7 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
 
     onEarnCoins(clamped);
     setCoinInput2('');
+    setDiscordInput2('');
   };
 
   const handleSubmit3 = (e: React.FormEvent) => {
@@ -97,6 +102,7 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
 
     onEarnCoins(clamped);
     setCoinInput3('');
+    setDiscordInput3('');
   };
 
   return (
@@ -396,8 +402,9 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
                 }}
               />
             </div>
-            <form onSubmit={handleSubmit1} className="flex flex-col gap-2">
+            <form onSubmit={handleSubmit1} className="flex flex-col gap-3">
               <div className="space-y-1">
+                <label className="block text-[11px] font-semibold text-slate-300">Amount of Coins:</label>
                 <div className="flex items-center gap-2">
                   <div className="relative max-w-[150px]">
                     <input
@@ -420,6 +427,20 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
                 </div>
                 <div className="text-[10px] text-slate-400 font-medium pl-0.5">Maximum is 10k</div>
               </div>
+
+              <div className="space-y-1">
+                <label className="block text-[11px] font-semibold text-slate-300">Discord Username:</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="username#0000"
+                    value={discordInput1}
+                    onChange={(e) => setDiscordInput1(e.target.value)}
+                    className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
+                  />
+                </div>
+              </div>
+
               <div className="h-4">
                 {parseInt(coinInput1, 10) > 0 && (
                   <div className="text-red-500 text-[10px] font-bold flex items-center gap-1">
@@ -443,8 +464,9 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
                 }}
               />
             </div>
-            <form onSubmit={handleSubmit2} className="flex flex-col gap-2">
+            <form onSubmit={handleSubmit2} className="flex flex-col gap-3">
               <div className="space-y-1">
+                <label className="block text-[11px] font-semibold text-slate-300">Amount of Coins:</label>
                 <div className="flex items-center gap-2">
                   <div className="relative max-w-[150px]">
                     <input
@@ -467,6 +489,20 @@ export const MemberCoinsPage: React.FC<MemberCoinsPageProps> = ({
                 </div>
                 <div className="text-[10px] text-slate-400 font-medium pl-0.5">Maximum is 10k</div>
               </div>
+
+              <div className="space-y-1">
+                <label className="block text-[11px] font-semibold text-slate-300">Discord Username:</label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="username#0000"
+                    value={discordInput2}
+                    onChange={(e) => setDiscordInput2(e.target.value)}
+                    className="w-full bg-[#050811] border border-slate-700/80 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 outline-none transition-all shadow-inner"
+                  />
+                </div>
+              </div>
+
               <div className="h-4">
                 {parseInt(coinInput2, 10) > 0 && (
                   <div className="text-red-500 text-[10px] font-bold flex items-center gap-1">

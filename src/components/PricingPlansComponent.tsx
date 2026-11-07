@@ -34,7 +34,7 @@ const plans: PricingPlan[] = [
     id: 'starter',
     name: 'Community Starter',
     description: 'Perfect for new Discord servers starting organic growth.',
-    price: { monthly: 18.99, annual: 15 },
+    price: { monthly: 18.99, annual: 14.99 },
     icon: Rocket,
     ctaText: 'Get Started',
     features: [
@@ -42,13 +42,14 @@ const plans: PricingPlan[] = [
       { text: 'Basic server analytics & logs', included: true },
       { text: 'Standard community queue priority', included: true },
       { text: '24/7 Support access', included: true },
+      { text: '2,000 coins received', included: true },
     ],
   },
   {
     id: 'pro',
     name: 'Professional Boost',
     description: 'For growing communities scaling up rapidly.',
-    price: { monthly: 48.99, annual: 39 },
+    price: { monthly: 48.99, annual: 38.99 },
     icon: Zap,
     highlight: true,
     ctaText: 'Upgrade to Pro',
@@ -58,13 +59,14 @@ const plans: PricingPlan[] = [
       { text: 'Performance insights & analytics', included: true },
       { text: 'Custom community workflows', included: true },
       { text: 'Priority support with SLA', included: true },
+      { text: '5,000 coins received', included: true },
     ],
   },
   {
     id: 'enterprise',
     name: 'Enterprise Network',
     description: 'For large-scale mission-critical communities.',
-    price: { monthly: 99.99, annual: 79 },
+    price: { monthly: 99.99, annual: 78.99 },
     icon: Building2,
     ctaText: 'Contact Sales',
     features: [
@@ -72,6 +74,7 @@ const plans: PricingPlan[] = [
       { text: 'Custom placement & banners', included: true },
       { text: 'Advanced security & audit logs', included: true },
       { text: 'Custom bot integrations', included: true },
+      { text: '10,000 coins received', included: true },
     ],
   }
 ];
@@ -129,13 +132,18 @@ export const PricingPlansComponent: React.FC<PricingPlansProps> = () => {
           const Icon = plan.icon;
 
           return (
-            <div
+            <motion.div
               key={plan.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              whileHover={{ y: -8, scale: 1.02 }}
               className={cn(
-                "relative flex flex-col rounded-3xl p-6 sm:p-7 backdrop-blur-xl transition-all duration-300",
+                "relative flex flex-col rounded-3xl p-6 sm:p-7 backdrop-blur-xl transition-shadow duration-300",
                 plan.highlight 
-                  ? "bg-gradient-to-b from-[#0e172e] to-[#070b16] border-2 border-sky-500/60 shadow-[0_0_40px_rgba(56,189,248,0.2)] md:-mt-2 md:mb-2" 
-                  : "bg-[#080d19]/90 border border-slate-800/90 hover:border-sky-500/30"
+                  ? "bg-gradient-to-b from-[#0e172e] to-[#070b16] border-2 border-sky-500/60 shadow-[0_0_40px_rgba(56,189,248,0.25)] hover:shadow-[0_0_60px_rgba(56,189,248,0.45)] md:-mt-2 md:mb-2" 
+                  : "bg-[#080d19]/90 border border-slate-800/90 hover:border-sky-500/50 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)]"
               )}
             >
               {plan.highlight && (
@@ -188,7 +196,7 @@ export const PricingPlansComponent: React.FC<PricingPlansProps> = () => {
                 {plan.ctaText}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
-            </div>
+            </motion.div>
           );
         })}
       </div>
